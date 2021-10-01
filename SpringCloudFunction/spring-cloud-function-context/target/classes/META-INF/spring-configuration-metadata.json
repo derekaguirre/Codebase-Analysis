@@ -1,0 +1,49 @@
+{
+  "groups": [
+    {
+      "name": "app",
+      "type": "org.springframework.cloud.function.context.config.ContextFunctionCatalogInitializerTests$PropertiesConfiguration",
+      "sourceType": "org.springframework.cloud.function.context.config.ContextFunctionCatalogInitializerTests$PropertiesConfiguration"
+    },
+    {
+      "name": "spring.cloud.function",
+      "type": "org.springframework.cloud.function.context.FunctionProperties",
+      "sourceType": "org.springframework.cloud.function.context.FunctionProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.greeting",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.cloud.function.context.config.ContextFunctionCatalogInitializerTests$PropertiesConfiguration"
+    },
+    {
+      "name": "spring.cloud.function.application-context",
+      "type": "org.springframework.context.ApplicationContext",
+      "sourceType": "org.springframework.cloud.function.context.FunctionProperties"
+    },
+    {
+      "name": "spring.cloud.function.configuration",
+      "type": "java.util.Map<java.lang.String,org.springframework.cloud.function.context.FunctionProperties$FunctionConfigurationProperties>",
+      "sourceType": "org.springframework.cloud.function.context.FunctionProperties"
+    },
+    {
+      "name": "spring.cloud.function.definition",
+      "type": "java.lang.String",
+      "description": "Definition of the function to be used. This could be function name (e.g., 'myFunction') or function composition definition (e.g., 'myFunction|yourFunction')",
+      "sourceType": "org.springframework.cloud.function.context.FunctionProperties"
+    },
+    {
+      "name": "spring.cloud.function.expected-content-type",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.cloud.function.context.FunctionProperties"
+    },
+    {
+      "name": "spring.cloud.function.routing-expression",
+      "type": "java.lang.String",
+      "description": "SpEL expression which should result in function definition (e.g., function name or composition instruction). NOTE: SpEL evaluation context's root object is the input argument (e.g., Message).",
+      "sourceType": "org.springframework.cloud.function.context.FunctionProperties"
+    }
+  ],
+  "hints": []
+}

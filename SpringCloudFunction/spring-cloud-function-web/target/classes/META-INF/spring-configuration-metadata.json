@@ -1,0 +1,131 @@
+{
+  "groups": [
+    {
+      "name": "spring.cloud.function.web.export",
+      "type": "org.springframework.cloud.function.web.source.ExporterProperties",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties"
+    },
+    {
+      "name": "spring.cloud.function.web.export.sink",
+      "type": "org.springframework.cloud.function.web.source.ExporterProperties$Sink",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties",
+      "sourceMethod": "public org.springframework.cloud.function.web.source.ExporterProperties.Sink getSink() "
+    },
+    {
+      "name": "spring.cloud.function.web.export.source",
+      "type": "org.springframework.cloud.function.web.source.ExporterProperties$Source",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties",
+      "sourceMethod": "public org.springframework.cloud.function.web.source.ExporterProperties.Source getSource() "
+    },
+    {
+      "name": "spring.cloud.function.web.supplier",
+      "type": "org.springframework.cloud.function.web.source.SupplierProperties",
+      "sourceType": "org.springframework.cloud.function.web.source.SupplierProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.cloud.function.web.export.auto-startup",
+      "type": "java.lang.Boolean",
+      "description": "Flag to indicate that the supplier emits HTTP requests automatically on startup.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties"
+    },
+    {
+      "name": "spring.cloud.function.web.export.debug",
+      "type": "java.lang.Boolean",
+      "description": "Flag to indicate that extra logging is required for the supplier.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties"
+    },
+    {
+      "name": "spring.cloud.function.web.export.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Flag to enable the export of a supplier.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties"
+    },
+    {
+      "name": "spring.cloud.function.web.export.sink.content-type",
+      "type": "java.lang.String",
+      "description": "Content type to use when serializing source's output for transport (default 'application\/json`).",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties$Sink"
+    },
+    {
+      "name": "spring.cloud.function.web.export.sink.headers",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Additional headers to append to the outgoing HTTP requests.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties$Sink"
+    },
+    {
+      "name": "spring.cloud.function.web.export.sink.name",
+      "type": "java.lang.String",
+      "description": "The name of a specific existing Supplier to export from the function catalog.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties$Sink"
+    },
+    {
+      "name": "spring.cloud.function.web.export.sink.url",
+      "type": "java.lang.String",
+      "description": "URL template for outgoing HTTP requests. Each item from the supplier is POSTed to this target.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties$Sink"
+    },
+    {
+      "name": "spring.cloud.function.web.export.source.include-headers",
+      "type": "java.lang.Boolean",
+      "description": "Include the incoming headers in the outgoing Supplier. If true the supplier will be of generic type Message of T equal to the source type.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties$Source"
+    },
+    {
+      "name": "spring.cloud.function.web.export.source.type",
+      "type": "java.lang.Class<?>",
+      "description": "If the origin url is set, the type of content expected (e.g. a POJO class). Defaults to String.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties$Source"
+    },
+    {
+      "name": "spring.cloud.function.web.export.source.url",
+      "type": "java.lang.String",
+      "description": "URL template for creating a virtual Supplier from HTTP GET.",
+      "sourceType": "org.springframework.cloud.function.web.source.ExporterProperties$Source"
+    },
+    {
+      "name": "spring.cloud.function.web.supplier.auto-startup",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.cloud.function.web.source.SupplierProperties",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.cloud.function.web.supplier.debug",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.cloud.function.web.source.SupplierProperties",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.cloud.function.web.supplier.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.springframework.cloud.function.web.source.SupplierProperties",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.cloud.function.web.supplier.headers",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "org.springframework.cloud.function.web.source.SupplierProperties",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.cloud.function.web.supplier.name",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.cloud.function.web.source.SupplierProperties",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "spring.cloud.function.web.supplier.template-url",
+      "type": "java.lang.String",
+      "sourceType": "org.springframework.cloud.function.web.source.SupplierProperties",
+      "deprecated": true,
+      "deprecation": {}
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "spring.cloud.function.grpc",
+      "type": "org.springframework.cloud.function.grpc.FunctionGrpcProperties",
+      "sourceType": "org.springframework.cloud.function.grpc.FunctionGrpcProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.cloud.function.grpc.port",
+      "type": "java.lang.Integer",
+      "sourceType": "org.springframework.cloud.function.grpc.FunctionGrpcProperties"
+    }
+  ],
+  "hints": []
+}
