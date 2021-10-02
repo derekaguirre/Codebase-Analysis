@@ -373,3 +373,4 @@ SpringCloudFunction/spring-cloud-function-context/target/classes/org/springframe
 SpringCloudFunction/spring-cloud-function-context/target/classes/org/springframework/cloud/function/utils/FunctionClassUtils.class
 SpringCloudFunction/spring-cloud-function-context/target/classes/org/springframework/cloud/function/utils/FunctionMessageUtils.class
 SpringCloudFunction/spring-cloud-function-context/target/classes/org/springframework/cloud/function/utils/PrimitiveTypesFromStringMessageConverter.class
+SpringCloudFunction/spring-cloud-function-adapters/spring-cloud-function-adapter-openwhisk/src/test/java/org/springframework/cloud/function/adapter/openwhisk/OpenWhiskActionHandlerTest.java
