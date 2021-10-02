@@ -48,11 +48,11 @@ class VisitsServiceClientIntegrationTest {
     }
 
 
-    private void assertVisitDescriptionEquals(Visits visits, int petId, String description) {
-        assertEquals(1, visits.getItems().size());
-        assertNotNull(visits.getItems().get(0));
-        assertEquals(petId, visits.getItems().get(0).getPetId());
-        assertEquals(description, visits.getItems().get(0).getDescription());
+    private void assertVisitDescriptionEquals(Visits visitsObj, int petId, String visitDescr) {
+        assertEquals(1, visitsObj.getItems().size());
+        assertNotNull(visitsObj.getItems().get(0));
+        assertEquals(petId, visitsObj.getItems().get(0).getPetId());
+        assertEquals(visitDescr, visitsObj.getItems().get(0).getDescription());
     }
 
     private void prepareResponse(Consumer<MockResponse> consumer) {
