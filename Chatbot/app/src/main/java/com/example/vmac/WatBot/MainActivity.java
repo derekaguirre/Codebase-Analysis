@@ -52,25 +52,41 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public class MicrophoneAttr {
+        private MicrophoneInputStream capture;
+        private Context mContext;
+
+    }
+
+    public class MessageAttr {
+        private ArrayList messageArrayList;
+        private EditText inputMessage;
+    }
+    
+    MainActivity mainActivityObj = new MainActivity();
+    MainActivity.MessageAttr messageArrObj = mainActivityObj.new MessageAttr(); //instantiate the MessageAttr class
+    MainActivity.MicrophoneAttr MicrophoneAttr = mainActivityObj.new MicrophoneAttr(); //instantiate the mainActivityObj class
+
+  private Assistant watsonAssistant;
 
   private RecyclerView recyclerView;
   private ChatAdapter mAdapter;
-  private ArrayList messageArrayList;
-  private EditText inputMessage;
+  
   private ImageButton btnSend;
   private ImageButton btnRecord;
   StreamPlayer streamPlayer = new StreamPlayer();
   private boolean initialRequest;
-  private boolean permissionToRecordAccepted = false;
+  
   private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
   private static String TAG = "MainActivity";
   private static final int RECORD_REQUEST_CODE = 101;
   private boolean listening = false;
-  private MicrophoneInputStream capture;
-  private Context mContext;
-  private MicrophoneHelper microphoneHelper;
+  
 
-  private Assistant watsonAssistant;
+  private MicrophoneHelper microphoneHelper;
+  private boolean permissionToRecordAccepted = false;
+
+  
   private Response<SessionResponse> watsonAssistantSession;
   private SpeechToText speechService;
   private TextToSpeech textToSpeech;
