@@ -42,8 +42,9 @@ class PetResourceTest {
     OwnerRepository ownerRepository;
 
     @Test
-    void shouldGetAPetInJSonFormat() throws Exception {
-
+    void shouldGetAPetInJSonFormat() throws RuntimeException {
+        try {
+            
         Pet pet = setupPet();
 
         given(petRepository.findById(2)).willReturn(Optional.of(pet));
@@ -55,6 +56,10 @@ class PetResourceTest {
             .andExpect(jsonPath("$.id").value(2))
             .andExpect(jsonPath("$.name").value("Basil"))
             .andExpect(jsonPath("$.type.id").value(6));
+            
+        } catch (RuntimeException e) {
+            System.out.println(e);
+        }
     }
 
     private Pet setupPet() {
