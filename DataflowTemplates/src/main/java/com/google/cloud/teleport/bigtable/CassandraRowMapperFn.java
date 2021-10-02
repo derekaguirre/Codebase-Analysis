@@ -205,9 +205,9 @@ class CassandraRowMapperFn implements Mapper<Row>, Serializable {
    *     Tuple</a>
    */
   private FieldType toBeamRowType(DataType type) {
-    DataType.Name n = type.getName();
+    DataType.Name dataTypeName = type.getName();
 
-    switch (n) {
+    switch (dataTypeName) {
       case TIMESTAMP:
       case DATE:
         return FieldType.DATETIME;
@@ -236,9 +236,9 @@ class CassandraRowMapperFn implements Mapper<Row>, Serializable {
       case MAP:
         DataType kDataType = type.getTypeArguments().get(0);
         DataType vDataType = type.getTypeArguments().get(1);
-        FieldType k = toBeamRowType(kDataType);
-        FieldType v = toBeamRowType(vDataType);
-        return FieldType.map(k, v);
+        FieldType kType = toBeamRowType(kDataType);
+        FieldType vType = toBeamRowType(vDataType);
+        return FieldType.map(kType, vType);
       case VARCHAR:
       case TEXT:
       case INET:
@@ -283,8 +283,8 @@ class CassandraRowMapperFn implements Mapper<Row>, Serializable {
       case TIMEUUID:
         return ((UUID) value).toString();
       case DATE:
-        LocalDate ld = (LocalDate) value;
-        return new DateTime(ld.getYear(), ld.getMonth(), ld.getDay(), 0, 0);
+        LocalDate localDate = (LocalDate) value;
+        return new DateTime(localDate.getYear(), localDate.getMonth(), localDate.getDay(), 0, 0);
       case INET:
         return ((InetAddress) value).getHostAddress();
       default:
