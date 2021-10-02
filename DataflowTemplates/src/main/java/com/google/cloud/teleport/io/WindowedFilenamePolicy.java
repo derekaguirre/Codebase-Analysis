@@ -368,20 +368,14 @@ public abstract class WindowedFilenamePolicy extends FilenamePolicy {
     String suffix = "";
     String outputFilenamePrefix = "";
 
-    if (shardTemplate() != null) {
-      if (shardTemplate().get() != null) {
-        shardTemplate = shardTemplate().get();
-      }
+    if (shardTemplate() != null && shardTemplate().get() != null) {
+      shardTemplate = shardTemplate().get();
     }
-    if (suffix() != null) {
-      if (suffix().get() != null) {
-        suffix = suffix().get();
-      }
+    if (suffix() != null && suffix().get() != null) {
+      suffix = suffix().get();
     }
-    if (outputFilenamePrefix() != null) {
-      if (outputFilenamePrefix().get() != null) {
-        outputFilenamePrefix = outputFilenamePrefix().get();
-      }
+    if (outputFilenamePrefix() != null && outputFilenamePrefix().get() != null) {
+      outputFilenamePrefix = outputFilenamePrefix().get();
     }
 
     ResourceId outputFile =
