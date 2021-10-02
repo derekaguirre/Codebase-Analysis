@@ -102,14 +102,14 @@ public class ContextFunctionCatalogInitializer implements ApplicationContextInit
 			try {
 				register(registry, this.context.getDefaultListableBeanFactory());
 			}
-			catch (BeansException e) {
-				throw e;
+			catch (BeansException e1) {
+				System.out.println(e1);
 			}
-			catch (RuntimeException e) {
-				throw e;
+			catch (RuntimeException e2) {
+				System.out.println(e2);
 			}
-			catch (Exception e) {
-				throw new BeanCreationException("Cannot register from " + getClass(), e);
+			catch (Exception e3) {
+				throw new BeanCreationException("Cannot register from " + getClass(), e3);
 			}
 		}
 
