@@ -198,13 +198,60 @@ public class App {
 
     return result;
   }
+  public class DatabaseInfo{
+      private String databaseName, databaseUserName, databasePassword, databaseAddress, databasePort;
 
-  static void startSender(
-      String databaseName,
-      String databaseUserName,
-      String databasePassword,
-      String databaseAddress,
-      String databasePort,
+    public databaseInfo(String databaseName, String databaseUserName, String databasePassword, String databaseAddress,
+            String databasePort) {
+        this.databaseName = databaseName;
+        this.databaseUserName = databaseUserName;
+        this.databasePassword = databasePassword;
+        this.databaseAddress = databaseAddress;
+        this.databasePort = databasePort;
+    }
+
+    public String getDatabaseName() {
+        return databaseName;
+    }
+
+    public void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
+    }
+
+    public String getDatabaseUserName() {
+        return databaseUserName;
+    }
+
+    public void setDatabaseUserName(String databaseUserName) {
+        this.databaseUserName = databaseUserName;
+    }
+
+    public String getDatabasePassword() {
+        return databasePassword;
+    }
+
+    public void setDatabasePassword(String databasePassword) {
+        this.databasePassword = databasePassword;
+    }
+
+    public String getDatabaseAddress() {
+        return databaseAddress;
+    }
+
+    public void setDatabaseAddress(String databaseAddress) {
+        this.databaseAddress = databaseAddress;
+    }
+
+    public String getDatabasePort() {
+        return databasePort;
+    }
+
+    public void setDatabasePort(String databasePort) {
+        this.databasePort = databasePort;
+    }
+  }
+  static void startSender(s
+      DatabaseInfo databaseInfo,
       String gcpProject,
       String gcpPubsubTopic,
       String offsetStorageFile,
