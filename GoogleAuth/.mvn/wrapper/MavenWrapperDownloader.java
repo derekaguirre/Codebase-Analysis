@@ -20,30 +20,30 @@ import java.util.Properties;
 
 public class MavenWrapperDownloader {
 
-    private static final String WRAPPER_VERSION = "0.5.5";
+    private static final String WRAPPER_VER = "0.5.5";
     /**
      * Default URL to download the maven-wrapper.jar from, if no 'downloadUrl' is provided.
      */
-    private static final String DEFAULT_DOWNLOAD_URL = "https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/"
-        + WRAPPER_VERSION + "/maven-wrapper-" + WRAPPER_VERSION + ".jar";
+    private static final String STD_DL_URL = "https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/"
+        + WRAPPER_VER + "/maven-wrapper-" + WRAPPER_VER + ".jar";
 
     /**
      * Path to the maven-wrapper.properties file, which might contain a downloadUrl property to
      * use instead of the default one.
      */
-    private static final String MAVEN_WRAPPER_PROPERTIES_PATH =
+    private static final String MVN_WRA_PROP_PATH =
             ".mvn/wrapper/maven-wrapper.properties";
 
     /**
      * Path where the maven-wrapper.jar will be saved to.
      */
-    private static final String MAVEN_WRAPPER_JAR_PATH =
+    private static final String MVN_WRA_JAR_PTH =
             ".mvn/wrapper/maven-wrapper.jar";
 
     /**
      * Name of the property which should be used to override the default download url for the wrapper.
      */
-    private static final String PROPERTY_NAME_WRAPPER_URL = "wrapperUrl";
+    private static final String PROP_NAM_WRA_URL = "wrapperUrl";
 
     public static void main(String args[]) {
         System.out.println("- Downloader started");
@@ -52,17 +52,17 @@ public class MavenWrapperDownloader {
 
         // If the maven-wrapper.properties exists, read it and check if it contains a custom
         // wrapperUrl parameter.
-        File mavenWrapperPropertyFile = new File(baseDirectory, MAVEN_WRAPPER_PROPERTIES_PATH);
-        String url = DEFAULT_DOWNLOAD_URL;
+        File mavenWrapperPropertyFile = new File(baseDirectory, MVN_WRA_PROP_PATH);
+        String url = STD_DL_URL;
         if(mavenWrapperPropertyFile.exists()) {
             FileInputStream mavenWrapperPropertyFileInputStream = null;
             try {
                 mavenWrapperPropertyFileInputStream = new FileInputStream(mavenWrapperPropertyFile);
                 Properties mavenWrapperProperties = new Properties();
                 mavenWrapperProperties.load(mavenWrapperPropertyFileInputStream);
-                url = mavenWrapperProperties.getProperty(PROPERTY_NAME_WRAPPER_URL, url);
+                url = mavenWrapperProperties.getProperty(PROP_NAM_WRA_URL, url);
             } catch (IOException e) {
-                System.out.println("- ERROR loading '" + MAVEN_WRAPPER_PROPERTIES_PATH + "'");
+                System.out.println("- ERROR loading '" + MVN_WRA_PROP_PATH + "'");
             } finally {
                 try {
                     if(mavenWrapperPropertyFileInputStream != null) {
@@ -75,7 +75,7 @@ public class MavenWrapperDownloader {
         }
         System.out.println("- Downloading from: " + url);
 
-        File outputFile = new File(baseDirectory.getAbsolutePath(), MAVEN_WRAPPER_JAR_PATH);
+        File outputFile = new File(baseDirectory.getAbsolutePath(), MVN_WRA_JAR_PTH);
         if (!outputFile.getParentFile().exists() && !outputFile.getParentFile().mkdirs()) {
             System.out.println(
                     "- ERROR creating output directory '" + outputFile.getParentFile().getAbsolutePath() + "'");
