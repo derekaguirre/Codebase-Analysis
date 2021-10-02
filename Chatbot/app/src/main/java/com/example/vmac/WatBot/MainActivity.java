@@ -217,10 +217,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // Sending a message to Watson Assistant Service
-    private void sendMessage() {
-
-                        final String inputmessage = this.inputMessage.getText().toString().trim();
+    // Contains functionality that sends a message to Watson
+    public void sendMessageHelper(){
+        final String inputmessage = this.inputMessage.getText().toString().trim();
                         if (!this.initialRequest) {
                             Message inputMessage = new Message();
                             inputMessage.setMessage(inputmessage);
@@ -237,94 +236,102 @@ public class MainActivity extends AppCompatActivity {
 
                         this.inputMessage.setText("");
                         mAdapter.notifyDataSetChanged();
+    }
+    
+    //Contains a switch that allows Watson to speak to the user depending on message recieved
+    public void speakMessageLogic(List<RuntimeResponseGeneric> responses){
+        switch (r.responseType()) {
+            case "text":
+                outMessage = new Message();
+                outMessage.setMessage(r.text());
+                outMessage.setId("2");
 
-                        Thread thread = new Thread(new Runnable() {
+                messageArrayList.add(outMessage);
+
+                // speak the message
+                new SayTask().execute(outMessage.getMessage());
+                break;
+
+            case "option":
+                outMessage = new Message();
+                String title = r.title();
+                String OptionsOutput = "";
+                for (int i = 0; i < r.options().size(); i++) {
+                    DialogNodeOutputOptionsElement option = r.options().get(i);
+                    OptionsOutput = OptionsOutput + option.getLabel() + "\n";
+
+                }
+                outMessage.setMessage(title + "\n" + OptionsOutput);
+                outMessage.setId("2");
+
+                messageArrayList.add(outMessage);
+
+                // speak the message
+                new SayTask().execute(outMessage.getMessage());
+                break;
+
+            case "image":
+                outMessage = new Message(r);
+                messageArrayList.add(outMessage);
+
+                // speak the description
+                new SayTask().execute("You received an image: " + outMessage.getTitle()
+                        + outMessage.getDescription());
+                break;
+            default:
+                Log.e("Error", "Unhandled message type");
+        }
+    }
+    
+    //Full method that uses the above two methods as helper functions. Messaging system for Watson.
+    private void sendMessage() {
+        sendMessageHelper();
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    if (watsonAssistantSession == null) {
+                        ServiceCall<SessionResponse> call = watsonAssistant
+                                .createSession(new CreateSessionOptions.Builder()
+                                        .assistantId(mContext.getString(R.string.assistant_id)).build());
+                        watsonAssistantSession = call.execute();
+                    }
+
+                    MessageInput input = new MessageInput.Builder().text(inputmessage).build();
+                    MessageOptions options = new MessageOptions.Builder()
+                            .assistantId(mContext.getString(R.string.assistant_id)).input(input)
+                            .sessionId(watsonAssistantSession.getResult().getSessionId()).build();
+                    Response<MessageResponse> response = watsonAssistant.message(options).execute();
+                    Log.i(TAG, "run: " + response.getResult());
+                    if (response != null && response.getResult().getOutput() != null
+                            && !response.getResult().getOutput().getGeneric().isEmpty()) {
+
+                        List<RuntimeResponseGeneric> responses = response.getResult().getOutput().getGeneric();
+
+                        for (RuntimeResponseGeneric r : responses) {
+                            Message outMessage;
+                            sendMessageLogic(r);
+
+                        runOnUiThread(new Runnable() {
                             public void run() {
-                                try {
-                                    if (watsonAssistantSession == null) {
-                                        ServiceCall<SessionResponse> call = watsonAssistant.createSession(new CreateSessionOptions.Builder().assistantId(mContext.getString(R.string.assistant_id)).build());
-                                        watsonAssistantSession = call.execute();
-                                    }
+                                mAdapter.notifyDataSetChanged();
+                                if (mAdapter.getItemCount() > 1) {
+                                    recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null,
+                                            mAdapter.getItemCount() - 1);
 
-                                    MessageInput input = new MessageInput.Builder()
-                                            .text(inputmessage)
-                                            .build();
-                                    MessageOptions options = new MessageOptions.Builder()
-                                            .assistantId(mContext.getString(R.string.assistant_id))
-                                            .input(input)
-                                            .sessionId(watsonAssistantSession.getResult().getSessionId())
-                                            .build();
-                                    Response<MessageResponse> response = watsonAssistant.message(options).execute();
-                                    Log.i(TAG, "run: " + response.getResult());
-                                    if (response != null &&
-                                            response.getResult().getOutput() != null &&
-                                            !response.getResult().getOutput().getGeneric().isEmpty()) {
-
-                                        List<RuntimeResponseGeneric> responses = response.getResult().getOutput().getGeneric();
-
-                                        for (RuntimeResponseGeneric r : responses) {
-                                            Message outMessage;
-                                            switch (r.responseType()) {
-                                                case "text":
-                                                    outMessage = new Message();
-                                                    outMessage.setMessage(r.text());
-                                                    outMessage.setId("2");
-
-                                                    messageArrayList.add(outMessage);
-
-                                                    // speak the message
-                                                    new SayTask().execute(outMessage.getMessage());
-                                                    break;
-
-                                                case "option":
-                                                    outMessage =new Message();
-                                                    String title = r.title();
-                                                    String OptionsOutput = "";
-                                                    for (int i = 0; i < r.options().size(); i++) {
-                                                        DialogNodeOutputOptionsElement option = r.options().get(i);
-                                                        OptionsOutput = OptionsOutput + option.getLabel() +"\n";
-
-                                                    }
-                                                    outMessage.setMessage(title + "\n" + OptionsOutput);
-                                                    outMessage.setId("2");
-
-                                                    messageArrayList.add(outMessage);
-
-                                                    // speak the message
-                                                    new SayTask().execute(outMessage.getMessage());
-                                                    break;
-
-                                                case "image":
-                                                    outMessage = new Message(r);
-                                                    messageArrayList.add(outMessage);
-
-                                                    // speak the description
-                                                    new SayTask().execute("You received an image: " + outMessage.getTitle() + outMessage.getDescription());
-                                                    break;
-                                                default:
-                                                    Log.e("Error", "Unhandled message type");
-                                            }
-                                        }
-
-                                        runOnUiThread(new Runnable() {
-                                            public void run() {
-                                                mAdapter.notifyDataSetChanged();
-                                                if (mAdapter.getItemCount() > 1) {
-                                                    recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, mAdapter.getItemCount() - 1);
-
-                                                }
-
-                                            }
-                                        });
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
                                 }
+
                             }
                         });
-
-                        thread.start();
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+    }
 
 
     //Record a message via Watson Speech to Text
