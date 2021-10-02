@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View viewInput) {
                 if (checkInternetConnection()) {
                     sendMessage();
                 }
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnRecord.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View viewInput) {
                 recordMessage();
             }
         });
