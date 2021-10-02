@@ -188,17 +188,17 @@ public class MemoryBasedJavaFileManager implements JavaFileManager {
 	private String getClassPath() {
 		if (this.classpath == null) {
 			ClassLoader loader = InMemoryJavaFileObject.class.getClassLoader();
-			String cp = null;
+			String tmpClassPath = null;
 			if (loader instanceof URLClassLoader) {
-				cp = classPath((URLClassLoader) loader, cp);
+				tmpClassPath = classPath((URLClassLoader) loader, tmpClassPath);
 			}
-			if (cp == null) {
-				cp = System.getProperty("java.class.path");
+			if (tmpClassPath == null) {
+				tmpClassPath = System.getProperty("java.class.path");
 			}
 			if (hasJrtFsPath()) {
-				cp = cp + File.pathSeparator + getJrtFsPath();
+				tmpClassPath = tmpClassPath + File.pathSeparator + getJrtFsPath();
 			}
-			this.classpath = pathWithPlatformClassPathRemoved(cp);
+			this.classpath = pathWithPlatformClassPathRemoved(tmpClassPath);
 		}
 		return this.classpath;
 	}
