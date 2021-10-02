@@ -250,7 +250,7 @@ public class App {
         this.databasePort = databasePort;
     }
   }
-  static void startSender(s
+  static void startSender(
       DatabaseInfo databaseInfo,
       String gcpProject,
       String gcpPubsubTopic,
